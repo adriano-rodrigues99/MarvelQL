@@ -8,7 +8,7 @@ export default class CharacterModel extends MarvelApiModel {
 	}
 	async getOne(where: NexusGenInputs['CharacterWhereInput']) {
 		try {
-			const response = await this.marvel.get(`/characters`, { params: where });
+			const response = await this.get(`/characters`, { params: where });
 			return this.formatApiData(response.results[0]);
 		} catch (error) {
 			console.error(error);
