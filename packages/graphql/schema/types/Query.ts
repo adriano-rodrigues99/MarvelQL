@@ -1,8 +1,28 @@
 import { objectType, arg, intArg } from 'nexus';
 import config from '../../config';
+
 export const Query = objectType({
     name: "Query",
     definition(t) {
+        t.field("charactersWithTotal", {
+            type: "CharacterData",
+            nullable: true,
+            description: 'Fetches a list of characters with total count.',
+            args: {
+                where: arg({ type: "CharacterWhereInput" }),
+                offset: intArg({ description: "Skips the specified number of resources in the result set." }),
+                limit: intArg({ description: "Limit the result set to the specified number of resources." }),
+                orderBy: arg({ type: "CharacterOrderBy" }),
+            },
+            async resolve(_, args, ctx, info) {
+                return await ctx.charactersModel.getManyWithTotal(
+                    args.where,
+                    args.orderBy,
+                    args.limit,
+                    args.offset
+                );
+            },
+        });
         t.list.field("characters", {
             type: "Character",
             nullable: true,

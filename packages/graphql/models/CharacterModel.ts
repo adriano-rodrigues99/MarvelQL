@@ -6,6 +6,7 @@ export default class CharacterModel extends MarvelApiModel {
 	constructor() {
 		super();
 	}
+
 	async getOne(where: NexusGenInputs['CharacterWhereInput']) {
 		try {
 			const response = await this.get(`/characters`, { params: where });
@@ -15,6 +16,7 @@ export default class CharacterModel extends MarvelApiModel {
 			throw new Error(error);
 		}
 	}
+
 	async getMany(
 		where: NexusGenInputs['CharacterWhereInput'],
 		orderBy: NexusGenEnums["CharacterOrderBy"],
@@ -36,14 +38,40 @@ export default class CharacterModel extends MarvelApiModel {
 			throw new Error(error);
 		}
 	}
+
+	async getManyWithTotal(
+		where: NexusGenInputs['CharacterWhereInput'],
+		orderBy: NexusGenEnums["CharacterOrderBy"],
+		offset: number,
+		limit: number
+	) {
+		try {
+			const response = await this.get(`/characters`, {
+				params: {
+					...where,
+					orderBy: this.getOrderBy(orderBy, "characters"),
+					offset,
+					limit
+				}
+			});
+			return {
+				data: response.results.map((item) => this.formatApiData(item)),
+				total: response.total
+			};
+		} catch (error) {
+			console.error(error);
+			throw new Error(error);
+		}
+	}
+
 	formatApiData(item) {
 		return {
 			...item,
 			thumbnail: formatThumbnail(item.thumbnail),
-			comics: getSummary["comics"](item),
-			events: getSummary["events"](item),
-			series: getSummary["series"](item),
-			stories: getSummary["stories"](item)
+			comics: getSummary.comics(item),
+			events: getSummary.events(item),
+			series: getSummary.series(item),
+			stories: getSummary.stories(item)
 		};
 	}
 }

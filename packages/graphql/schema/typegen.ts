@@ -117,6 +117,10 @@ export interface NexusGenRootTypes {
     thumbnail?: string | null; // String
     urls?: NexusGenRootTypes['MarvelUrl'][] | null; // [MarvelUrl!]
   }
+  CharacterData: { // root type
+    data?: NexusGenRootTypes['Character'][] | null; // [Character!]
+    total: number; // Int!
+  }
   Comic: { // root type
     characters?: NexusGenRootTypes['Summary'][] | null; // [Summary!]
     collectedIssues?: NexusGenRootTypes['Summary'][] | null; // [Summary!]
@@ -285,6 +289,10 @@ export interface NexusGenFieldTypes {
     thumbnail: string | null; // String
     urls: NexusGenRootTypes['MarvelUrl'][] | null; // [MarvelUrl!]
   }
+  CharacterData: { // field return type
+    data: NexusGenRootTypes['Character'][] | null; // [Character!]
+    total: number; // Int!
+  }
   Comic: { // field return type
     characters: NexusGenRootTypes['Summary'][] | null; // [Summary!]
     collectedIssues: NexusGenRootTypes['Summary'][] | null; // [Summary!]
@@ -367,6 +375,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     characters: NexusGenRootTypes['Character'][] | null; // [Character!]
+    charactersWithTotal: NexusGenRootTypes['CharacterData'] | null; // CharacterData
     comics: NexusGenRootTypes['Comic'][] | null; // [Comic!]
     creators: NexusGenRootTypes['Creator'][] | null; // [Creator!]
     engineInfo: string | null; // String
@@ -441,6 +450,12 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenEnums['CharacterOrderBy'] | null; // CharacterOrderBy
       where?: NexusGenInputs['CharacterWhereInput'] | null; // CharacterWhereInput
     }
+    charactersWithTotal: { // args
+      limit?: number | null; // Int
+      offset?: number | null; // Int
+      orderBy?: NexusGenEnums['CharacterOrderBy'] | null; // CharacterOrderBy
+      where?: NexusGenInputs['CharacterWhereInput'] | null; // CharacterWhereInput
+    }
     comics: { // args
       limit?: number | null; // Int
       offset?: number | null; // Int
@@ -498,7 +513,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Character" | "Comic" | "ComicDate" | "ComicImage" | "ComicPrice" | "Creator" | "Event" | "MarvelUrl" | "Query" | "Series" | "Story" | "Summary" | "TextObject";
+export type NexusGenObjectNames = "Character" | "CharacterData" | "Comic" | "ComicDate" | "ComicImage" | "ComicPrice" | "Creator" | "Event" | "MarvelUrl" | "Query" | "Series" | "Story" | "Summary" | "TextObject";
 
 export type NexusGenInputNames = "CharacterWhereInput" | "ComicWhereInput" | "CreatorWhereInput" | "EventsWhereInput" | "SeriesWhereInput" | "StoriesWhereInput";
 

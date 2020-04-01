@@ -54,13 +54,14 @@ export const Character = objectType({
             description: 'Lists of stories filtered by a character id.',
         })
     }
-})
+});
 
 export const CharacterOrderBy = enumType({
     name: "CharacterOrderBy",
     description: 'Orders the result set by a field or fields. Multiple values are given priority in the order in which they are passed.',
     members: [{ description: 'Returns character in A-Z order (i.e 3-D Man, A-Bomb (HAS), A.I.M, etc...)', name: 'name_asc', value: 'name_asc' }, { description: 'Returns character in Z-A order (i.e , etc...)', name: 'name_desc', value: 'name_desc' }, { description: "Returns character's modification date in ascending order", name: 'modified_asc', value: 'modified_asc' }, { description: "Returns character's modification date in descending order", name: 'modified_desc', value: 'modified_desc' }],
 });
+
 export const CharacterWhereInput = inputObjectType({
     name: "CharacterWhereInput",
     description: 'Optional filters for characters. See notes on individual inputs below.',
@@ -75,3 +76,15 @@ export const CharacterWhereInput = inputObjectType({
         t.list.id("stories", { description: 'Returns only characters which appear the specified stories (accepts a comma-separated list of ids).' });
     }
 });
+
+export const CharacterData = objectType({
+    name: "CharacterData",
+    definition(t) {
+        t.list.field("data", {
+            type: "Character",
+            nullable: true,
+            description: 'A set of characters.',
+        })
+        t.int("total", { description: 'Returns total of characters' });
+    }
+})
