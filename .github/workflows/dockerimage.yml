@@ -3,22 +3,12 @@ name: Backend Chat CI/CD
 on:
   push:
     branches:
-      - master
+      - ci
   pull_request:
     branches:
-      - master
+      - ci
 
 jobs:
-  ci:
-    runs-on: ubuntu-latest
-    container:
-      image: node:12.16.1
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install
-        run: |
-          yarn install
   cd:
     runs-on: ubuntu-latest
     needs: ci
