@@ -5,7 +5,6 @@ WORKDIR /app
 RUN touch .env
 RUN yarn add esm --global && yarn add ts-node --global && yarn add typescript --global && yarn add dotenv-extended && yarn install
 COPY . /app
-ADD entrypoint.sh entrypoint.sh
 RUN chmod 755 entrypoint.sh && chown dtdevs:dtdevs entrypoint.sh
 USER dtdevs
 EXPOSE 8081
