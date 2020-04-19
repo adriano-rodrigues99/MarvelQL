@@ -13,7 +13,7 @@ const server = new ApolloServer({
 	playground: { version: '1.7.20' },
 	introspection: true
 });
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8081;
 server.listen(PORT).then(({ url }) => {
 	console.log(`🚀  Server ready at ${url}`);
 });
