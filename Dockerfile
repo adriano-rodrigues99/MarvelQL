@@ -5,7 +5,9 @@ RUN adduser --system --group dtdevs
 
 WORKDIR /app
 
-RUN yarn add esm --global && yarn add ts-node --global && yarn add typescript --global && yarn install
+RUN touch .env
+
+RUN yarn add esm --global && yarn add ts-node --global && yarn add typescript --global && yarn add dotenv-extended && yarn install
 
 COPY . /app
 
