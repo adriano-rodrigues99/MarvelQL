@@ -17,10 +17,8 @@ jobs:
       name: Check out code
 
     - uses: mr-smithers-excellent/docker-build-push@v3
-      name: Build & push Docker image
       with:
-        image: dtdevs/marveql
-        tag: latest
+        image: dtdevs/marvelql
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
