@@ -8,5 +8,4 @@ COPY . /app
 ADD entrypoint.sh entrypoint.sh
 RUN chmod 755 entrypoint.sh && chown dtdevs:dtdevs entrypoint.sh
 USER dtdevs
-ENTRYPOINT ["./entrypoint.sh"]
 EXPOSE 8081
